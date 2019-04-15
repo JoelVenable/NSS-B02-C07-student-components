@@ -1,12 +1,11 @@
-const createStudentComponent = (student) => {
+const createStudentComponent = (student,fragment) => {
   const addComponent = function (tag, content, parent) {
       const element = document.createElement(tag)
       element.textContent = content
       parent.appendChild(element)
       return element
     },
-    container = document.querySelector('#container'),
-    div = addComponent('div', '', container),
+    div = addComponent('div', '', fragment),
     h2 = addComponent('h2', student.name, div),
     section = addComponent('section', student.subject, div),
     aside = addComponent('aside', student.info, div);
@@ -23,6 +22,8 @@ const createStudentComponent = (student) => {
 
 }
 
+const fragment = document.createDocumentFragment()
 students.forEach(student => {
-  createStudentComponent(student)
+  createStudentComponent(student, fragment)
 })
+document.querySelector('#container').appendChild(fragment);
